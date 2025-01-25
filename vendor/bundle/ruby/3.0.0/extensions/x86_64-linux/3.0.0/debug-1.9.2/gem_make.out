@@ -1,0 +1,16 @@
+current directory: /home/guimelo03/Códigos/Ruby/ruby_api/notebook-api4/vendor/bundle/ruby/3.0.0/gems/debug-1.9.2/ext/debug
+/usr/bin/ruby3.0 -I /usr/lib/ruby/vendor_ruby -r ./siteconf20241009-78249-gf9ys7.rb extconf.rb
+creating Makefile
+
+current directory: /home/guimelo03/Códigos/Ruby/ruby_api/notebook-api4/vendor/bundle/ruby/3.0.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= clean
+
+current directory: /home/guimelo03/Códigos/Ruby/ruby_api/notebook-api4/vendor/bundle/ruby/3.0.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\=
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/guimelo03/Códigos/Ruby/ruby_api/notebook-api4/vendor/bundle/ruby/3.0.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20241009-78249-v5787g/debug
