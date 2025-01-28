@@ -1,8 +1,20 @@
 class Contact < ApplicationRecord
     #Associations
-    belongs_to :kind, optional: true
+    belongs_to :kind #, optional: true
     has_many :phones
-    accepts_nested_attributes_for :phones
+    has_one :address
+
+    accepts_nested_attributes_for :address
+    accepts_nested_attributes_for :phones, allow_destroy: true
+
+    def as_json(options={})
+    h = super(options)
+    h[:birthdate] = (
+        I18n.l(self.birthdate) unless self.birthdate.blank?
+        )
+    h
+end
+
     # def birthdate_br
     #     I18n.l(self.birthdate) unless Contact.birthdate.blank?
     # end
@@ -14,11 +26,6 @@ class Contact < ApplicationRecord
     #         birthdate: (I18n.l(self.birthdate) unless self.birthdate.blank?)
     #     }
     # end
-
-    def as_json(options={})
-        h = super(options)
-        h[:birthdate] = (I18n.l(self.birthdate) unless self.birthdate.blank?)
-    end
     
     # def author
     #     "Guilherme Melo"
@@ -31,8 +38,8 @@ class Contact < ApplicationRecord
     # def as_json(options={})
     #     super(
     #         root: true,
-    #         methods: [:kind_description, :author],
-    #         include: { kind: {only: :description } }
+    #         # methods: [:kind_description, :author],
+    #         include: { kind: {only: :description }, :phones}
     #         )
     # end
 end
