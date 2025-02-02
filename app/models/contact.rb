@@ -4,8 +4,8 @@ class Contact < ApplicationRecord
     has_many :phones
     has_one :address
 
-    accepts_nested_attributes_for :address
     accepts_nested_attributes_for :phones, allow_destroy: true
+    accepts_nested_attributes_for :address, update_only: true
 
     def as_json(options={})
     h = super(options)
@@ -13,7 +13,7 @@ class Contact < ApplicationRecord
         I18n.l(self.birthdate) unless self.birthdate.blank?
         )
     h
-end
+    end
 
     # def birthdate_br
     #     I18n.l(self.birthdate) unless Contact.birthdate.blank?
@@ -38,8 +38,12 @@ end
     # def as_json(options={})
     #     super(
     #         root: true,
-    #         # methods: [:kind_description, :author],
-    #         include: { kind: {only: :description }, :phones}
-    #         )
+    #         methods: [:kind_description, :author],
+    #         include: {
+    #         kind: { only: :description },
+    #         phones: { only: :number },   # ou o que você quiser exibir de phones
+    #         address: { only: [:street, :city] } # ou os atributos desejados de address
+    #         }
+    #     )
     # end
 end

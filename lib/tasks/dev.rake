@@ -1,6 +1,9 @@
 namespace :dev do
     desc "Configura o ambiente de desenvolvimento"
     task setup: :environment do
+      puts "Reiniciando o banco de dados..."
+      %x(rails db:drop db:create db:migrate)
+
       puts "Cadastrando os tipos de contatos..."
   
       # Criar os tipos de contatos (kinds)
@@ -17,7 +20,7 @@ namespace :dev do
           name: Faker::Name.name,
           email: Faker::Internet.email,
           birthdate: Faker::Date.between(from: 65.years.ago, to: 18.years.ago),
-          kind: kinds.sample # Atribui um kind aleatório
+          kind: Kind.all.sample 
         )
       end
   
@@ -33,6 +36,17 @@ namespace :dev do
 
     puts "Telefones cadastrados com sucesso!"
 
+    puts "Cadastrando os endereços..."
+
+    Contact.all.each do |contact|
+      address = Address.create!(
+        street: Faker::Address.street_address ,
+        city: Faker::Address.city,
+        contact: contact
+      )
+    end
+
+    puts "Endereços cadastrados com sucesso!"
     end
 end
   
