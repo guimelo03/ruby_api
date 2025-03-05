@@ -28,6 +28,8 @@ gem 'devise_token_auth'
 gem 'devise-i18n'
 gem 'bcrypt', '~> 3.1.16'
 gem 'versionist'
+gem 'kaminari'
+gem 'api-pagination'
 
 
 
