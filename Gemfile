@@ -30,6 +30,9 @@ gem 'bcrypt', '~> 3.1.16'
 gem 'versionist'
 gem 'kaminari'
 # gem 'api-pagination'
+gem 'rack'
+gem 'webrick'
+
 
 
 
