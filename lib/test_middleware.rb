@@ -4,7 +4,14 @@ class TestMiddleware
   end
 
   def call(env)
-    [200, { "Content-Type" => "text/plain" }, ["Teste: Middleware funcionando!"]]
+    # puts ">>>>>> #{env}"
+    if env["ORIGINAL_FULLPATH"] == "/"
+      ['200', {'Content-Type' => 'text/html'}, ["Teste!"]]
+    else
+      status, headers, response = @app.call(env)
+      headers.merge!({'X-App-Name' => "Notebook - API"})
+      [status, headers, [response.body]]
+    end
   end
 end
   
